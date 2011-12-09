@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @movie.title %>
+</p>
+
+<p>
+  <b>Director:</b>
+  <%= @movie.director.name %>
+</p>
+
+<p>
+  <b>Premiere on:</b>
+  <%= @movie.premiere_on %>
+</p>
+
+<p>
+  <b>Synopsis:</b>
+  <%= @movie.synopsis %>
+</p>
+
+
+<h2>Add review</h2>
+
+<%= form_for [@movie, Review.new] do |f| %>
+  <div class="field">
+    <%= f.label :stars %><br />
+    <%= f.text_field :stars %>
+  </div>
+  <div class="field">
+    <%= f.label :comment %><br />
+    <%= f.text_area :comment %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<% unless @movie.reviews.empty? %>
+  <h2>Reviews</h2>
+  <% for review in @movie.reviews %>
+    <p>
+      <b>Stars:</b>
+      <%= review.stars %>
+    </p>
+
+    <p>
+      <b>Comment:</b>
+      <%= review.comment %>
+    </p>
+  <% end %>
+<% end %>
+
+
+<%= link_to 'Edit', edit_movie_path(@movie) %> |
+<%= link_to 'Back', movies_path %>
